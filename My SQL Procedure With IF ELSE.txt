@@ -1,0 +1,20 @@
+CREATE or Replace PROCEDURE doiterate(INOUT p1 INT)
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    DECLARE j INT DEFAULT 1;
+    outer_loop: LOOP
+        IF i > 10 THEN
+            LEAVE outer_loop;
+        END IF;
+        inner_loop: LOOP
+            IF j > 10 THEN
+                LEAVE inner_loop;
+            END IF;
+            SET p1 = p1 + 1;
+            SET j = j + 1;
+        END LOOP inner_loop;
+        SET j = 1;  
+        SET i = i + 1;
+    END LOOP outer_loop;
+    SET @x = p1;
+END;

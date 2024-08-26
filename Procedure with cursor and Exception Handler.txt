@@ -1,0 +1,21 @@
+create or replace procedure eg()
+begin
+	declare  d int;
+	declare done int default 0;
+	declare my_cur cursor for select employeeNumber from employees ;	
+	DECLARE EXIT HANDLER FOR NOT FOUND 
+	begin
+		rollback;
+		select 'there is an error in this procedure so we are exiting';
+	end;
+	open my_cur;
+     		my_loop:LOOP
+			if done then 
+				leave my_loop;
+			end if;     			
+			fetch my_cur into d;
+     			select d;		
+    	end loop;
+	select 'this is continue handler';
+    	close my_cur;
+     	end
