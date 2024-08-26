@@ -1,0 +1,21 @@
+create or replace procedure eg()
+begin
+	declare  id int;
+	declare name varchar(100);
+	declare price decimal(11,2);
+	declare done int default 0;
+	declare my_cur cursor for select id,name,price from items;	
+	DECLARE continue HANDLER FOR 1062
+	begin
+		rollback;
+		select 'there is already a data with same value';
+	end;
+	open my_cur;
+     		my_loop:LOOP   			
+			fetch my_cur into id,name,price;
+			select id,name,price;
+     			insert into items values(id,name,price);
+    	end loop;
+	select 'this is continue handler';
+    	close my_cur;
+     	end
