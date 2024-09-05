@@ -1,0 +1,107 @@
+
+--to list down all availble procedure
+show procedure status;
+
+
+--to check the procedure code
+show procedure code eg;
+
+
+--to change delimiter 
+delimiter $
+
+
+--to write code block
+begin 
+end$
+
+
+--to Write Procedure
+CREATE OR REPLACE PROCEDURE my_pro()
+BEGIN
+	select * from employees LIMIT 10;
+END$
+
+--to write Functions
+CREATE 
+
+
+--to Call Procedure 
+ CALL MY_PRO()$
+
+
+--Example of IN and OUT 
+CREATE OR REPLACE PROCEDURE get_email(IN id int,OUT container varchar(20))
+BEGIN
+	select email into container from employees where employeeNumber =id; 
+END$
+
+
+CREATE OR REPLACE PROCEDURE get_emails(IN from_ int,IN uptill int)
+BEGIN
+	select employeenumber, email from employees 
+	where employeeNumber between from_ and uptill;
+END$
+ 
+
+call get_emails(100,200)$
+
+
+
+call get_email(1056,@email1)$
+
+set @id =1056$
+call get_email(@id,@email1)$
+
+
+
+--to Drop Procedure
+drop procedure my_pro$
+
+
+
+--To declare Variable inside Procedure
+
+CREATE OR REPLACE PROCEDURE get_var()
+BEGIN
+	declare var int;
+	
+	set Var=1001;
+	select vAr;
+END$
+
+
+
+--with IF ELSE 
+CREATE OR REPLACE PROCEDURE odd_even(in num int)
+BEGIN
+	if (num%2) = 0 then
+	select concat(num,' is Even') as result;
+	else if (num%2) != 0 then
+	select concat(num,' is odd')as result;
+	end if;
+	end if;
+END$
+
+
+call odd_even(10)$
+
+
+7718805463
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

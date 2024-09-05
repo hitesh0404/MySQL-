@@ -1,0 +1,26 @@
+--Declare   DECLARE
+--open      OPEN
+--iterate   FETCH
+--close	    CLOSE	
+
+
+
+CREATE OR REPLACE PROCEDURE cur(IN id_INT INT)
+BEGIN 
+	DECLARE id INT ;
+	DECLARE mycur CURSOR for select employeeNumber from employees;
+	DECLARE EXIT HANDLER FOR NOT FOUND
+	BEGIN 
+		SELECT 'ERROR HERE';
+		SELECT 'THIS IS SECOND LINE';
+	END;
+	OPEN mycur;
+	L:lOOP
+	FETCH mycur into id;
+	IF id % 2 !=0 THEN
+		SELECT 'this is odd id',ID;
+	ELSE 
+		SELECT 'this is even id',ID;
+	END IF;
+	END LOOP;
+END

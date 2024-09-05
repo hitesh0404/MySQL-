@@ -1,0 +1,105 @@
+CREATE OR  REPLACE TRIGGER ins_sum BEFORE INSERT ON account
+FOR EACH ROW 
+BEGIN
+	IF new.acct_num<0 THEN
+	SET new.acct_num=0;
+	END IF;
+END
+
+CREATE OR  REPLACE TRIGGER Ten BEFORE INSERT ON account
+FOR EACH ROW 
+BEGIN
+	set new.amount  = new.amount + (new.amount*0.10);
+END
+
+
+create table backup(acct_num int,amount decimal(10,2));$
+
+
+CREATE OR  REPLACE TRIGGER Ten AFTER INSERT ON account
+FOR EACH ROW 
+BEGIN
+	insert into backup values(new.acct_num,new.amount);
+END
+
+
+insert into account values(5,100),(1,2000)$
+
+show create trigger ten;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++------+--------+-----------------+----------------+
+| id   | name   | password        | dfg            |
++------+--------+-----------------+----------------+
+|    1 | vishal | 9892            | vishal9892     |
+|    2 | Vibhu  | new second pass | new fisrt pass |
++------+--------+-----------------+----------------+
+
+ update user_info set password='abc' where id =2$
+
+
+
+old.password       =    9892            --check inside table
+new.password       =    abc		--check inside query
+old.dfg            =    vishal9892	
+new.dfg            =    NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table user_info(id int,
+			name varchar(20),
+			password varchar(20),
+			old_password varchar(20));
+
+create table account(id int ,
+			name varchar(20),
+			current_pass varchar(20),
+			previous_pass varchar(20));
+
+
+CREATE OR REPLACE TRIGGER check_password BEFORE UPDATE ON account
+FOR EACH ROW 
+BEGIN
+	IF old.current_pass = new.current_pass or old.previous_pass = new.current_pass then
+		SIGNAL SQLSTATE  '65000'
+			SET MESSAGE_TEXT='Previously used passwork try anything else';
+	ELSE
+		SET new.previous_pass = old.current_pass;
+	END IF;	
+	
+END
+
+
+
+
+
+
+
+
+
+

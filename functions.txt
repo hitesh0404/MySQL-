@@ -1,0 +1,16 @@
+CREATE OR REPLACE PROCEDURE PRO1( IN OUT  INOUT OUT OUT ) 
+
+
+CREATE OR REPLACE FUNCTION get_full_name(id int )
+RETURNS varchar(20)
+DETERMINISTIC
+BEGIN 
+	DECLARE name varchar(20) default '';
+	SELECT concat(firstName,lastName) into name from employees
+		  				where employeeNumber=id;
+	return name;
+end
+	
+
+
+
