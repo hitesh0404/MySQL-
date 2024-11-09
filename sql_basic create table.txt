@@ -1,0 +1,38 @@
+create database batch203;
+use batch203;
+
+create table dept(
+	id       int primary key,
+	name     varchar(20),
+	location varchar(20));
+
+create table employees(
+	id         int primary key,
+	firstname  varchar(20),
+	lastname   varchar(20),
+	age        int(2),
+	department int,
+	foreign key(department)
+	references dept(id));
+
+
+alter table employees 
+	add column 
+		department_name varchar(20) ;
+
+alter table employees add constraint 
+foreign key(department_name) references dept(name);
+
+
+foreign key(<child_col>) references parentTable(<parent_col>)
+
+
+
+
+
+insert into employees values(101,'rahul','rane',32,1);
+
+
+
+
+

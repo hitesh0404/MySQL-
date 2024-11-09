@@ -1,0 +1,76 @@
+delimiter $
+drop table temp$
+create table temp as select id,firstname,lastname,age from employees limit 1$
+
+CREATE OR REPLACE TRIGGER info_insert AFTER INSERT ON employees
+FOR EACH ROW
+begin
+	insert into  temp values(new.id,new.firstname,new.lastname,new.age);
+end$
+
+ insert into employees values(1805,'heera','lal',43,3,1337)$
+
+create table ex_emp as select * from employees limit 0$
+create table new_emp as select * from employees$
+
+CREATE or REPLACE TRIGGER emp_backup BEFORE DELETE ON new_emp
+FOR EACH ROW
+BEGIN
+	INSERT INTO ex_emp values
+(old.id,OLD.firstname,OLD.lastname,OLD.age,OLD.department,OLD.managerid);
+END$
+
+
+	delete from new_emp where id < 1301$
+
+
+12345678 repl by 87654321 
+
+87654321 repl by 1234567890   
+
+1234567890   error recently used error
+
+
+
+
+create table user (
+	id int, 
+	username varchar(20),
+	password varchar(20),
+	old_password varchar(20))$
+
+
+
+create or replace trigger check_pass before update on user
+for each row
+begin
+	if new.password = old.password || new.password = old.old_password 
+	
+	then 
+		signal sqlstate '65000'
+		set message_text = 'recently used password';
+	else
+		set new.old_password = old.password;
+	end if;
+end$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+create procedure firstprocedure (in val int)
+   	select val;
+
+
+
+call firstprocedure(12);
+
+
+create function sqr(val int) 
+returns int  
+	return val*val;
+
+
+select sqr(3);
+
+
+
+
+
+create procedure sqr(in val int)
+select val*val;
+
+call sqr(4);
+
+drop procedure sqr;
+
+
+create procedure sqr1(in val int,out result int )
+set result= val*val;
+
+
+create or replace procedure sqr1(inout val int )
+set val= val*val;
+
+create function greet()
+ returns varchar(10)
+ return 'hello';
+
+
+
+Create function <function Name>
+
+  returns <return dataType>
+
+		return <calculated value>;
+
+
+
+
+
+
+create one procedure which insert a record in dept
+
+
+Create procedure insert_into_dept 
+	( in id int,in name varchar(20),in location varchar(20) )
+insert into dept values(id,name,location);
+
+
+
+call insert_into_dept (8,'Q&A','Pune')
+
+
+
+
+
+
+

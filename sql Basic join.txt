@@ -1,0 +1,32 @@
+select 
+		<col>,
+		<col>,
+		<col>
+from 
+		table_name1
+
+<type Of join> join
+		
+		table_name2
+
+		using (customernumber)
+		 limit 10;
+
+
+
+select  customerNumber , 
+	CustomerName , 
+	checkNumber , 
+	paymentDate , 
+	amount  
+
+from 
+		payments
+
+inner join 
+	
+		customers 
+
+		using (customerNumber)
+		 limit 10; 
+

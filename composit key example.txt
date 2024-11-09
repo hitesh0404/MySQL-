@@ -1,0 +1,52 @@
+
+
+
+
+
+
+
+
+
+create table project(
+	id int primary key,
+	name varchar(20),
+	startDate date,
+	dueDate date,
+	status varchar(20));
+	
+create table projectDetails (
+	id int primary key,
+	empID int,
+	projectId int,
+	unique(empId,projectId),
+	foreign key(empID) references employees(id),
+	foreign key(projectId) references project(id)
+				);
+
+
+
+
+
+
+
+
++----+-----------+----------+
+| id | name      | location |
++----+-----------+----------+
+|  1 | IT        | mumbai   |
+|  2 | HR        | Chennai  |
++----+-----------+----------+
+insert into dept values(3,'R&D','Hydrabad');
+insert into dept values(4,'Sales','Delhi');
+insert into dept values(5,'Marketing','Pune');
+insert into dept values(6,'Training','Nashik');
+insert into dept values(0,'HO','Mumabi');
+
+insert into employees 
+	select employeeNumber,
+		firstName,
+		lastName,
+		round(rand()*10000)%50,
+		round(rand()*100)%6  
+	from classicmodels.employees ;
+delete from employees where age<18;

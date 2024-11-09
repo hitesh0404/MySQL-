@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+insert into project values
+(201,'Ecom','2024-04-01','2024-12-20','Pending'),
+(202,'Shoe Manage','2024-05-01','2024-10-12','Done'),
+(203,'Report Assign','2024-03-02','2024-12-23','Working'),
+(204,'Employee Salary','2021-12-31','2024-07-21','Done'),
+(205,'Student Fee','2024-06-01','2024-10-12','Done'),
+(206,'Exam Schedule','2024-08-02','2024-12-23','Working'),
+(207,'Batch assign ','2022-12-31','2024-07-21','Done'),
+(208,'Employee Report','2024-01-10','2024-10-12','Working'),
+(209,'Shipping Status','2024-05-11','2024-10-12','Done'),
+(210,'Notification System','2023-05-01','2024-10-12','Done'),
+(211,'App Ghost Message','2023-06-30','2024-07-21','Working'),
+(212,'Spam Alert','2023-10-01','2024-10-12','Pending'),
+(213,'Record manage','2024-05-01','2024-10-12','Working'),
+(214,'Workoad Manage','2021-12-31','2024-07-21','Done'),
+(215,'Request Responce','2024-05-01','2024-10-12','Pending');

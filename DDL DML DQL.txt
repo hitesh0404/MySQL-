@@ -1,0 +1,93 @@
+DDL   structure
+
+	create
+
+
+		create table tn(
+			column_name datatype,
+			column_name datatype,
+			column_name datatype,
+			)
+id first_name last_name age
+
+
+
+		create table student(
+			id int,
+			first_name varchar(20),
+			last_name varchar(20),
+			age int(2));
+		describe student;
+		desc student;
+
+
+
+	drop
+
+		drop table tn;
+
+	
+	alter
+
+
+		*	alter table student add column roll_number int;
+		alter table student drop column roll_number;
+		alter table student add constraint cn_name constraint def;
+		alter table student drop constraint cn_name;
+		*	alter table student modify roll_number varchar(20) ;
+		*	alter table student change age dob date;
+			A. add
+				i.column
+				ii.constraints(table level)
+					1.primary key
+					2.unique
+					3.foreign key
+					4.check
+			B. drop
+				i.column
+				ii.constraints
+			c. modify
+				i.add or remove constraints(column level)
+					1.auto_increament
+					2.not null
+					3.default
+					4.check 
+				
+				ii.datatype
+				iii.position of column
+				iv.rename table or column
+
+
+	truncate
+			truncate student;
+
+
+DML	data
+
+	insert 
+			insert into student values(1,'fn','ln','yyyy-mm-dd');
+			insert into student values(1,'fn','ln','yyyy-mm-dd'),(1,'fn','ln','yyyy-mm-dd');
+			
+			insert into student(id,first_name) values(1,'fn'),(1,'fn');
+	update
+
+			update student set id=3 where id=1 ;
+	delete
+
+			delete from student where id =1;
+DQL	fetch
+
+	select
+
+			select id, first_name from student;
+
+			select id, first_name from student limit 10;
+		
+	
+			select id,first_name from student order by id desc limit 4;
+
+
+
+		
+			
+

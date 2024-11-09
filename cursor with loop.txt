@@ -1,0 +1,37 @@
+delimiter $
+
+
+Create or replace procedure counter(in count int)
+begin
+	mywhile:while count>=0 
+		do
+		select count;
+		set count = count-1;
+	end while mywhile;
+end$
+create or replace procedure cur_eg(inout input_id int)
+begin
+	declare count int default 0;
+	declare ex int default 0;
+	declare my_cur cursor for select id from employees;
+	declare continue Handler for not found set ex =1 ;
+	open my_cur;
+	myloop:loop
+	set count = count+1;
+	if ex =1 then 
+		leave myloop;
+	else	
+		fetch my_cur into input_id;
+		select input_id,count;
+		iterate myloop;
+		
+	end if;
+	end loop;
+	close my_cur;
+	select 'here i am';
+end$
+
+
+call cur_eg(@my_var) $
+
+select @my_var $

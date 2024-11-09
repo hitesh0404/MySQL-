@@ -1,0 +1,26 @@
+create or replace function check_email(email varchar(30))
+returns varchar(10)
+begin 
+	declare last varchar(10);
+	declare aft_sub_str  varchar(30);
+	declare stlength int;
+	declare elength int;
+	set aft_sub_str = substring_index(email,'@',1);
+	set stlength = length(aft_sub_str);
+	set elength =length(email);
+	set last = substr(email ,-4);
+	if  stlength <= 0 then return 'false'; end if;
+	if last!='.com' 
+	then 
+		return 'false';	
+	elseif
+		elength-6 >= stlength
+	then 
+		return 'true';
+	else 
+		return 'false';
+	end if;		
+end$
+
+
+select check_email('hp@gmail.com');

@@ -1,0 +1,91 @@
+delimiter $
+
+
+
+create or replace procedure multilineProcedure()
+begin
+	select * from employees limit 1;
+	select * from dept limit 1;
+end$
+
+create or replace procedure ageData()
+begin
+	select avg(age),min(age),max(age) from employees;
+end$
+
+
+create or replace procedure getEmpFromDeptName(in deptname varchar(20))
+begin
+	declare deptId int;
+	select id into deptId from dept where name=deptname;
+	select * from employees where department = deptId;
+end$
+
+
+create or replace function random4()
+returns int
+begin
+	declare val int;
+	select round(rand()*10000) into val;
+	if val<1000 then set val= val+1000;
+	end if;
+	return val;	
+end$
+
+
+
+create or replace function larger(a int, b int, c int)3,2,4
+returns int
+begin
+	declare large int;
+	if a>b 
+		then
+			if a>c then set large=a;
+			else set large=c;
+			end if;
+	elseif b>c  
+		then 
+			set large=b;
+	else 
+		set large=c;
+	end if;
+
+	return large;
+end$
+
+
+
+create or replace procedure repeate_until(in num int)
+
+begin
+	declare count int default 1;
+	create table if not exists temp(id int);
+	repeat 
+		insert into temp values(count * num) ;
+		set count = count+1;
+		until count>10
+	end repeat;
+	select * from temp;
+	drop table temp;
+	
+end$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

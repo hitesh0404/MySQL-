@@ -1,0 +1,154 @@
+select * from payments where customerNumber  in (121,172,350);
+select * from payments where amount between 1000 and 2000;
+
+
+select * from payments where customerNumber =121 
+					or 
+				customernumber = 172 
+					or 
+				customerNumber=350;
+
+select * from payments where amount >1000 
+				and 
+			     amount<2000;
+
+
+List Operator
+-- select <col> from <tn> where <col> |not| in (<val>,<val>,<val>);
+
+Range Operator
+-- select <col> from <tn> where <col> |not| between <val> and <val>;
+
+
+
+
+
+select * from payments where 
+
+			paymentDate     between '2004-01-01' and '2005-01-01' 
+
+				and 
+
+			amount 	        between 10000 and 20000
+
+  				and 
+
+			customernumber  in (121,362,350);
+
+
+
+
+
+Distinct
+select distinct(jobTitle) from employees;
+
+
+is Null | is not Null
+
+select * from offices where state is Null;
+select * from offices where state is Not Null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table student
+		(
+			id       int        primary key auto_increment,
+			name     varchar(20),
+			marks    double(4,2)
+		);
+insert into student vlaues(1,'Ritu',60);
+insert into student vlaues(2,'Ritesh',65);
+insert into student vlaues(3,'Rakesh',50);
+insert into student vlaues(4,'Rajan',90);
+insert into student vlaues(5,'Rahul',80);
+insert into student vlaues(6,'Ramu',85);
+insert into student vlaues(7,'Renu',70);
+insert into student vlaues(8,'Ramesh',55);
+insert into student values(9,'Ranjan',75);
+
+insert into student values(1,'Ritu',60),(2,'Ritesh',65),(3,'Rakesh',50),
+(4,'Rajan',90),(5,'Rahul',80),(6,'Ramu',85),(7,'Renu',70),(8,'Ramesh',55),
+(9,'Ranjan',75);
+
+
+
+
+
+
+select id, name, marks , 
+		case
+			when marks<=50
+				 then 'D'
+			when marks <=55
+				 then 'C'
+			when marks<=60
+				 then 'C+'
+			when marks <=65
+				 then 'B'
+			when marks<=70
+				 then 'B+'
+			when marks <=75
+				 then 'A'
+			when marks<=80
+				 then 'A+'
+			when marks <=85
+				 then 'O'
+			when marks<=90
+				 then 'O+'
+			
+		END AS GRADE
+						FROM STUDENT;
+
+			
+
+DML
+
+Insert
+		insert into <tn>(<col>,<col>) values(<col>,<col>);
+		
+		insert into <tn>(<col>,<col>) values(<col>,<col>),
+						    (<col>,<col>),
+						    (<col>,<col>);
+
+	
+
+		insert into <tn> values(<col>,<col>);
+
+		insert into <tn> values(<col>,<col>),
+				       (<col>,<col>),
+			       	       (<col>,<col>);
+
+		
+Update
+		update <table name> set <col> = <val> where <condition>;
+
+
+
+
+Delete
+		Delete from student  where <condition>;
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+

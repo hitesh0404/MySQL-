@@ -1,0 +1,54 @@
+select * from projectdetails 
+		join employees 
+		on employees.id = empId 
+
+
+		join project 
+			on projectId = project.id ;
+
+
+find the project in which rahul was involved;
+1.what is id of rahul
+select id from employees where firstname = 'rahul';
+2.how many project are there in projectdetails where empid is rahul's id
+3.get the project which status is done;
+
+
+find all employees with project 214 
+
+select * from employees join projectdetails on employees.id = empid where projectid = 214;
+
+
+
+update projectDetails set empId = Null where id%2=1 order by id limit 8 ;
+
+
+
+
+
+select * from employees right join projectdetails on empid = employees.id;
+ 
+
+select * from dept left join employees on department = dept.id; 
+
+
+
+alter table employees add column managerId int;
+alter table employees add constraint 
+foreign key(managerId) references employees(id);
+
+
+update employees set managerId = 
+	(
+	select id from employees as internal
+	 where 
+		internal.department  = employees.department 
+		order by age desc limit 1 ) ;
+update employees set managerid = Null where id=managerid;
+
+
+
+
+
+
+

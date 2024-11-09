@@ -1,0 +1,60 @@
+string function
+	concat('str','str')
+	concat_ws('ws','str','str','str')
+	length('str') index strat's with 1 returns length of given value according to the byte size
+	char_length() 
+	substr(str,strat_index,count) count can + or -
+	substring_index(str,specific_char,count)
+	replace('str' ,'old' ,'newstr')
+	reverse('str')
+	trim('str')
+	rtrim('str')
+	ltrim('str')
+Math function
+	abs(num)
+	ceil(num)
+	floor(num)
+	round(num,position) - or  +
+	mod(num)
+	rand()
+	truncate(num)
+	pi()
+	pow(num, power) or power()
+	sqrt(num)
+
+Date time function
+	curdate()
+	curtime()
+	now()   sysdate()
+	date_format()
+			%a	for day
+			%b	for month
+			%c 	for month in number
+			%Y 	for year in 4 digit
+			%M 	for full month name
+			%T	for 24 hour format time
+			%r 	for 12 hour format
+			%p 	for AM or PM
+			%W	for full day name
+
+select round(rand()*10000);
+select round(150,-2);
+
+
+Example:
+
+
+select  concat('hello  ','  World');
+select	concat_ws('|','Python','Java','MySQL');
+select	length('Hello world with the example of STR Functions');
+select	char_length('क्रोध ');
+select  length('क्रोध '); 
+select	substr('this is good',1,4) ;
+select	reverse('JAVA')
+select	substring_index('this is hello world this is MySQL','this',1);
+select	substring_index('this is hello world this is MySQL','this',2);
+select	replace('CPython' ,'C' ,'J');
+select	trim('   hello this is with extra space   ') as a;
+select	rtrim('   hello   ') as r;
+select	ltrim('   hello   ') as l;
+	

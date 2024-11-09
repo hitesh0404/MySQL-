@@ -24,3 +24,9 @@ BEGIN
 	END IF;
 	END LOOP;
 END
+
+
+
+assignment   i=0
+condition    i<2
+inc/dec      i=i+1
