@@ -1,20 +1,20 @@
 create or replace function check_email(email varchar(30))
-returns varchar(10)
-begin 
-	declare last varchar(10);
-	declare aft_sub_str  varchar(30);
-	declare stlength int;
-	declare elength int;
-	set aft_sub_str = substring_index(email,'@',1);
-	set stlength = length(aft_sub_str);
-	set elength =length(email);
-	set last = substr(email ,-4);
-	if  stlength <= 0 then return 'false'; end if;
-	if last!='.com' 
+returns varchar(10)                
+begin                            
+	declare last_letters varchar(10);
+	declare before_at_symbol_text  varchar(30);
+	declare before_at_symbol_text_length  int;
+	declare email_length int;
+	set before_at_symbol_text = substring_index(email,'@',1);
+	set before_at_symbol_text_length = length(before_at_symbol_text);
+	set email_length =length(email);
+	set last_letters = substr(email ,-4);
+	if  before_at_symbol_text_length = 0 then return 'false'; end if;      --there should be at least one letter before @
+	if last_letters !='.com' 
 	then 
 		return 'false';	
-	elseif
-		elength-6 >= stlength
+	elseif     -- there should be atleast one letter after @
+		email_length - 6 >= before_at_symbol_text_length
 	then 
 		return 'true';
 	else 
