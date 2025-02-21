@@ -1,0 +1,76 @@
+create table old_emp 
+(
+ employee_id    int primary key,
+ name varchar(20),
+ joining_date   date,
+ salary         double(10,2),
+ department_id   int,
+ document_id  int ,
+ manager_id   int  ,
+ leave_date  date    ,
+ manager_name  varchar(20));
+
+create procedure delete_emp (in emp_id int)
+begin 
+declare manager_name varchar(20) default (select 
+						m.name 
+					 from 
+						employee m 
+					 where 
+						m.employee_id = (select 
+									manager_id 
+								from 
+									employee 
+								where 
+									employee_id = emp_id
+								)
+						);
+insert into old_emp select 
+				* 
+			from 
+				employee 
+			join
+				(select now()) as leave_date 
+			join 
+				(select manager_name) as m 
+			where 
+				employee_id = emp_id;
+delete from employee where employee_id= emp_id;
+end$
+
+
+
+
+
+
+create trigger before_delete_emp before delete  on employee
+FOR EACH ROW
+begin
+declare emp_id int default old.employee_id;
+declare manager_name varchar(20) default (select 
+						m.name 
+					 from 
+						employee m 
+					 where 
+						m.employee_id = (select 
+									manager_id 
+								from 
+									employee 
+								where 
+									employee_id = emp_id
+								)
+						);
+insert into old_emp select 
+				* 
+			from 
+				employee 
+			join
+				(select now()) as leave_date 
+			join 
+				(select manager_name) as m 
+			where 
+				employee_id = emp_id;
+
+end$
+
+

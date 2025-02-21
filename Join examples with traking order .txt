@@ -1,0 +1,16 @@
+create database batch203r;
+use batch203r;
+create table emp(id int primary key,
+     name varchar(20),
+     age int(1),
+     salary decimal(10,2));
+
+ create table dept(
+     id int primary key,
+     name varchar(50),
+     location varchar(20));
+
+alter table emp add column dept int ,add constraint foreign key(dept) references dept(id);
+insert into dept select officecode,addressLine1,city from classicmodels.offices;
+insert into emp(id,name,dept) select employeeNumber,concat(firstname,' ',lastname),officecode from
+    classicmodels.employees;

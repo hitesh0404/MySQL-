@@ -1,0 +1,62 @@
+create table user(
+                             user_id int Primary key,
+                             username varchar(20) unique not null ,
+                             FirstName varchar(20) ,
+                             LastName varchar(20),
+                             password varchar(20) ,
+                             DOB date ,
+                             created_date datetime default now()
+		);
+ create table post (
+                              post_id int primary key,
+                              title varchar(20) ,
+                              description varchar(100),
+                              created_date datetime default now(),
+                              updated_date datetime,
+                              user_id int ,
+                              foreign key(user_id) references user(user_id)
+		);
+create table UserPostLike(
+				user_id int ,
+				post_id int,
+				foreign key (user_id) references user(user_id),
+				foreign key (post_id) references post(post_id),
+				primary key(user_id,post_id)
+			);
+
+
+alter table <tn> rename column <cn> to <ncn>;
+
+
+insert into user values(1,"hp","raj","rathod","123","2000-12-12",null);
+insert into user values(2,"ry","rajesh","yadav","123","2001-12-12",null);
+insert into user values(3,"sy","suhana","yadav","123","2004-12-12",null);
+
+
+insert into post values(101,"new year","happy new year",null,null,1);
+insert into post values(102,"party","wish you ",null,null,1);
+
+
+insert into UserPostLike values(1,101),
+				(2,101),
+				(3,101),
+				(1,102),
+				(2,102),
+				(3,102);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

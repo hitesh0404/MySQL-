@@ -1,0 +1,86 @@
+select * from employees 
+	where  officecode in
+		(select officecode from offices 
+			where country=(select country from offices
+						 group by country
+						 order by count(*) 
+						desc limit 1
+					)
+		);
+
+
+
+select o.orderNumber from orders o
+	 where orderDate = (
+			select orderDate from orders 
+					group by orderDate 
+					order by count(*) desc 
+					limit 1);
+
+
+select * from orderdetails 
+		where orderNumber in(select o.orderNumber from orders o
+ 						where orderDate = (select orderDate from orders 
+										group by orderDate 
+										order by count(*) desc 
+										limit 1
+								   )
+				     );
+
+
+
+
+
+
+
+SELECT 
+    productname, 
+    buyprice
+FROM
+    products p1
+WHERE
+    buyprice > (SELECT 
+            AVG(buyprice)
+        FROM
+            products
+        WHERE
+            productline = p1.productline);
+
+
+
+
+
+
+
+update products p set quantityInStock = quantityInStock - (select case when quantityOrdered is null then 0 else quantityOrdered   end from orderdetails od
+								where orderNumber in(select o.orderNumber from orders o
+ 											where orderDate = (select orderDate from orders 
+														group by orderDate 
+														order by count(*) desc 
+														limit 1
+								   )
+				     )and p.productcode = od.productcode  );
+
+
+
+
+
+
+
+
+select o.*,c.city,c.customername from 
+	
+	(select in_o.* from orders in_o
+		where in_o.customernumber in 
+			
+			(select c1.customerNumber from 
+				customers c1 
+				
+				where c1.city= 'nantes'
+			)
+	) o
+
+		 join customers c using(customerNumber);
+
+
+ 

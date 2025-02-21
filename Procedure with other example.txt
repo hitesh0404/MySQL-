@@ -1,0 +1,19 @@
+create or replace procedure reports_to (in id int)
+select * from employees where reportsto = id;
+
+
+delimiter $
+create or replace procedure Maximum_amount_and_order(inout onum int,out amount decimal(10,2))
+begin
+select ordernumber into onum from orderdetails group by ordernumber 
+order by sum(priceEach*quantityOrdered) desc 
+			limit 1;
+select sum(priceEach*quantityOrdered) into amount from orderdetails group by ordernumber having ordernumber = onum ;
+
+end;
+
+
+
+
+
+

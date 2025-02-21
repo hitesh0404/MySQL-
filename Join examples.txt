@@ -1,8 +1,6 @@
 select * from projectdetails 
 		join employees 
 		on employees.id = empId 
-
-
 		join project 
 			on projectId = project.id ;
 

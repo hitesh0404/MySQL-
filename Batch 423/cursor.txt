@@ -1,0 +1,86 @@
+create procedure countNum(input int)
+begin
+	declare num int default input;
+	l1 :loop
+	if num<0 then leave l1;
+	else 
+		select num;
+		set num=num-1;
+		iterate l1;
+	end if ;
+	end loop l1;
+end;
+
+5 X 1 = 5
+5 X 2 = 10
+
+create procedure NumberTable(num int)   
+begin
+	declare counter int default 1;
+	declare result varchar(40);
+	create table numbertable(value varchar(40));
+	l1 :loop
+	if counter>10 then leave l1;
+	else 
+		set result = concat(num ,' X ',counter,' = ' , num*counter);
+		insert into numbertable values(result);
+		set counter = counter + 1;
+		iterate l1;
+	end if ;
+	end loop l1;
+	select value as 'Table' from numbertable ;
+	drop table numbertable;
+end;
+
+
+create procedure NumberTableWithRepeat(num int)   
+begin
+	declare counter int default 1;
+	declare result varchar(40);
+	create table numbertable(value varchar(40));
+	r1 :repeat
+		set result = concat(num ,' X ',counter,' = ' , num*counter);
+		insert into numbertable values(result);
+		set counter = counter + 1;
+	until counter>10 
+	end repeat r1;
+	select value as 'Table' from numbertable ;
+	drop table numbertable;
+end;
+
+
+
+
+create procedure NumberTableWithWhile(num int)   
+begin
+	declare counter int default 1;
+	declare result varchar(40);
+	create table numbertable(value varchar(40));
+	while counter<=10 do
+		set result = concat(num ,' X ',counter,' = ' , num*counter);
+		insert into numbertable values(result);
+		set counter = counter + 1; 
+	end while;
+	select value as 'Table' from numbertable ;
+	drop table numbertable;
+end;
+
+
+
+
+
+
+create procedure fetchEmp(counter int)
+begin
+	declare emp_name varchar(20) ;
+	declare mycur cursor for  select name from employee;
+	
+	open mycur;
+	while counter>0 do
+		fetch mycur into emp_name;
+		select emp_name;
+		set counter = counter-1;
+	end while;
+	select "end";
+	close mycur;
+end$

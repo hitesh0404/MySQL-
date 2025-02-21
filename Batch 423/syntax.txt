@@ -1,0 +1,88 @@
+Rename Table <table_name> to <new_name_of_table>;
+
+
+
+rename table 
+		project to newProject;
+
+
+
+Alter table <tn> rename column <old_cn> to <new_cn>;
+
+alter table 
+		newProject 
+rename column 
+		project_id to ProjectID;
+
+
+Alter table <tn> rename to <new_name_of_table>;
+
+alter table 
+		newProject 
+		rename to Project;
+
+truncate
+
+drop table <tn>;
+
+
+insert into <tn>
+	    values
+		(<val1>,<val2>,...);
+
+insert into <tn>
+	    values
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...);
+
+
+insert into <tn>
+		(<col1>,<col2>,...)
+	    values
+		(<val1>,<val2>,...);
+
+insert into <tn>
+		(<col1>,<col2>,...)
+	    values
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...),
+		(<val1>,<val2>,...);
+
+
+
+
+
+
+
+
+
+
+
+
+insert into Project values(105,"raj","Ecom","2024-01-02","2025-12-31","2025-10-31");
+
+insert into Project(projectid,project_Name) 
+					values 
+						(105,"Shop"),
+						(106,"library"),
+						(107,"Hospital");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

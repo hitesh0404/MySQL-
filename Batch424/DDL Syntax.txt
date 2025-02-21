@@ -1,0 +1,64 @@
+create table <table_name> (
+				<col_name> <data_type>,
+				<col_name> <data_type>,
+				<col_name> <data_type>,
+				<col_name> <data_type>,
+				<col_name> <data_type>,....
+);
+
+CREATE TABLE <table_name> (
+
+			<column1_name> <data_type> [<constraint_if_any>],
+
+			<column2_name> <data_type> [<constraint_if_any>],
+
+			<column3_name> <data_type> [<constraint_if_any>],
+
+);
+
+create table emp (
+				id int,
+				name varchar(20),
+				age int,
+				salary float(12,2),
+				join_date date
+);
+
+
+describe  <table_name>;
+desc <table_name>;
+
+
+
+
+
+
+alter table <table_name> <option> ;
+
+option
+	-add 
+		--column
+				---<column_name> <data_type> [<constraint_if_any>] [after<col_name>|first]
+				
+		--constraints
+				---<constrint_name>;
+	-drop
+		--column
+				---<column_name>;
+		--constraints
+				---<constrint_name>;
+	-modify
+		--<column_name> <data_type> [<constraint_if_any>] [after<col_name>|first]
+
+
+
+
+
+
+
+
+
+
+
+
+

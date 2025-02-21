@@ -21,6 +21,12 @@ begin
 	select * from employees where department = deptId;
 end$
 
+create function f1(val int)
+    returns int
+    begin
+    return ceil(rand()*10);
+    end$
+
 
 create or replace function random4()
 returns int
@@ -29,9 +35,11 @@ begin
 	select round(rand()*10000) into val;
 	if val<1000 then set val= val+1000;
 	end if;
-	return val;	
+	return val;
+		
 end$
 
+select rand();
 
 
 create or replace function larger(a int, b int, c int)3,2,4

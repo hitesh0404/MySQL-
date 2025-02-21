@@ -1,0 +1,362 @@
+select 
+	orderNumber,
+	orderDate,
+	datediff(requiredDate,orderDate) as placed_before,
+	datediff(shippedDate,orderDate)	as processed_after 
+from 
+	orders 
+limit 10;
+
+
+
+select 
+	customernumber,
+	min(datediff(requiredDate,orderDate))
+					as min_placed_before,  
+	max(datediff(requiredDate,orderDate))
+					as max_placed_before,  
+	min(datediff(shippedDate,orderDate))	
+					as min_processed_after ,
+	max(datediff(shippedDate,orderDate))	
+					as max_processed_after ,
+case
+	when avg(datediff(shippedDate,orderDate)) >6 then "slow"
+	when avg(datediff(shippedDate,orderDate)) =6 then "avg"
+	when avg(datediff(shippedDate,orderDate)) <6 then "Fast"
+end	 as movement
+from 
+	orders 
+group by customernumber ;
+
+
+select 
+	customernumber ,
+	avg(datediff(requiredDate,orderDate))
+					as placed_before,  
+	avg(datediff(shippedDate,orderDate))	
+					as processed_after ,
+case
+	when avg(datediff(shippedDate,orderDate)) >6 then "slow"
+	when avg(datediff(shippedDate,orderDate)) =6 then "avg"
+	when avg(datediff(shippedDate,orderDate)) <6 then "Fast"
+end	 as movement
+from 
+	orders  
+group by customernumber;
+
+
+
+
+
+
+
+
+select movement,count(movement) from(
+    select 
+	customernumber ,
+	avg(datediff(requiredDate,orderDate))
+					as placed_before,
+	avg(datediff(shippedDate,orderDate))	
+					as processed_after ,
+case
+	when avg(datediff(shippedDate,orderDate)) >6 then "slow"
+	when avg(datediff(shippedDate,orderDate)) =6 then "avg"
+	when avg(datediff(shippedDate,orderDate)) <6 then "Fast"
+end	 as movement
+from 
+	orders  
+group by customernumber) as raj group by movement;
+
+
+
+
+
+
+
+
+select 
+	orders.customernumber ,
+	customerName,
+	avg(datediff(requiredDate,orderDate))
+					as placed_before,
+	avg(datediff(shippedDate,orderDate))	
+					as processed_after 
+from 
+	orders  
+join 
+	customers 
+
+using(customernumber)
+ 
+group by customernumber ;
+
+
+
+
+
+
+
+
+
+
+select 
+	min(datediff(requiredDate,orderDate))
+					as placed_before,
+	max(datediff(shippedDate,orderDate))	
+					as processed_after 
+from 
+	orders ;
+
+
+
+select 
+	customernumber,
+	datediff(requiredDate,orderDate)
+					as placed_before
+from 
+	orders where datediff(requiredDate,orderDate)<=6;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+avg
+(o1	1000 
+		od1   100
+		od2   200
+		od3   550
+		od4   150
+o2	2000
+		od1   100
+		od2   200
+		od3   550
+		od4   150
+		od5   800
+		od6   200
+o3	500
+		od1	500
+
+o4	2500
+		od1   100
+		od2   200
+		od3   550
+		od4   150
+		od5   800
+		od6   200
+		od7   500
+-------------
+	6000/4	=	1500
+	6000/18 =       333.33
+
+)  group by customernumber
+ sum(od.price*od.quantity) group by ordernumber	
+
+
+
+103  =  22314.36/3  =   7438.12
+
+select
+    c.customerNumber ,
+    customerName ,
+    sum(od.quantityOrdered * od.priceEach) as total
+from 
+	customers c
+join 
+	orders o
+using(customernumber)
+    
+join 
+	orderdetails od
+using (ordernumber)
+	
+group by c.customernumber  
+    
+order by customernumber
+    limit 10;
+
+
+create view total_order_value
+as
+select
+	o.ordernumber,
+	o.customernumber,
+	sum(od.quantityOrdered * od.priceEach) as total
+from
+	orders o
+join 
+	orderdetails od
+using (ordernumber)
+
+group by o.ordernumber
+order by o.customernumber
+   ;
+
+select 
+	customernumber,
+	avg(total)
+from
+	total_order_value
+group by 
+	customernumber
+limit 10;
+	
+
+
+
+
+
+
+
+select 
+	customernumber,
+	avg(total)
+from
+	(
+
+select
+	o.ordernumber,
+	o.customernumber,
+	sum(od.quantityOrdered * od.priceEach) as total
+from
+	orders o
+join 
+	orderdetails od
+using (ordernumber)
+
+group by o.ordernumber
+order by o.customernumber
+
+) as total_order_value
+group by 
+	customernumber
+limit 10;
+
+
+
+select 
+	e.*,
+	m.name
+from 
+	employee e
+left join 
+	employee m
+on 
+	
+	e.manager_id = m.emp_id;
+
+
+
+
+select 
+	c1.customerNumber,
+	c1.customerName,
+	c1.city,
+	c2.customerNumber as o_c_number,
+	c2.customerName as o_c_name,
+	c2.phone as other_customer_phone
+from 
+	customers c1
+join 
+	customers c2
+on 
+	c1.city = c2.city
+where 
+	c1.customernumber != c2.customernumber 
+	and c1.customernumber = 131
+limit 10;
+
+
+
+inner 
+outer 
+	left 
+	right 
+	full 
+cross
+self  
+
+		
+
+
+
+
+
+
++-------------+------------+--------------+-------------+---------+----------+----------------+
+| orderNumber | orderDate  | requiredDate | shippedDate | status  | comments | customerNumber |
++-------------+------------+--------------+-------------+---------+----------+----------------+
+|       10103 | 2003-01-29 | 2003-02-07   | 2003-02-02  | Shipped | NULL     |            121 |
+|       10158 | 2003-10-10 | 2003-10-18   | 2003-10-15  | Shipped | NULL     |            121 |
+|       10309 | 2004-10-15 | 2004-10-24   | 2004-10-18  | Shipped | NULL     |            121 |
+|       10325 | 2004-11-05 | 2004-11-13   | 2004-11-08  | Shipped | NULL     |            121 |
++-------------+------------+--------------+----
+
+
+
+
+
+
+
+select 
+	city,
+	sum(total_amt),
+	count(customernumber)
+from (select 
+	c.customernumber,
+	c.customername,
+	c.city,
+	sum(quantityOrdered* priceEach) as total_amt
+from 
+	customers c
+join 
+	orders o
+
+	using(customernumber)
+join 
+	orderdetails
+	using(ordernumber)
+group by customernumber) as temp_data group  by city order by sum(total_amt);
+
+
+
+
+
+
+
+
+create procedure updateSal(in id_ int,in percentage float(4,2))
+begin
+	declare date_ date;
+	declare updatedSal double;
+	declare oldsalary float(10,2) default (select salary from employee where employee_id = id_);
+	select joining_date into date_ from employee where employee_id= id_;
+	set updatedSal = oldsalary + (datediff(now(),date_ )/365)*percentage*oldsalary/100;
+	update employee set salary = updatedSal  where employee_id = id_;
+end$
+
+
+create procedure p1(out val int) 
+     begin
+    set val= ceil(rand()*10);
+    
+     end$
+	
+
+
+
+
+
+
+
+

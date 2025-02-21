@@ -1,0 +1,37 @@
+DQL (Data Query Language)
+
+Select 
+	<col_name>,
+	<col_name> 
+from 
+	<table_name>;
+
+
+
+Select 
+	contactFirstName,
+	contactLastName
+from 
+	customers;
+
+
+
+Limit  -- to restrict the row count
+	-- it should be at last in query
+
+
+Select 
+	contactFirstName,
+	contactLastName
+from 
+	customers limit 10;
+
+--Offset will skips that much count of record specified before limit with ','
+
+Select 
+	contactFirstName,
+	contactLastName
+from 
+	customers limit 3,10; 
+				 -- skip 3 record then fetch 10 
+

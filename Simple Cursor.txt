@@ -5,10 +5,38 @@
 
 
 
+
+create procedure simp_cur()
+begin	
+	declare id int;
+	declare mycur cursor for select employee_id from employee;
+	declare continue handler for not found select "error";
+	open mycur;
+	fetch mycur into id;
+	select id;
+	close mycur;
+	select "end of the process";
+end$
+
+
+create procedure simp_cur2()
+begin	
+	declare uid int;
+	declare uname varchar(20);
+	declare mycur cursor for select id,name from user;
+	declare exit handler for not found select "error";
+	open mycur;
+	fetch mycur into uid,uname;
+	select uid,uname;
+	close mycur;
+	select "end of the process";
+end;
+
+
 CREATE OR REPLACE PROCEDURE cur(IN id_INT INT)
-BEGIN 
+BEGIN o
 	DECLARE id INT ;
-	DECLARE mycur CURSOR for select employeeNumber from employees;
+	DECLARE mycur CURSOR for select employee_id from employee;
 	DECLARE EXIT HANDLER FOR NOT FOUND
 	BEGIN 
 		SELECT 'ERROR HERE';

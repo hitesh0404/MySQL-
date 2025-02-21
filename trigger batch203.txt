@@ -32,20 +32,18 @@ END$
 
 
 
-
+delimiter $
 create table user (
 	id int, 
 	username varchar(20),
-	password varchar(20),
-	old_password varchar(20))$
+	password varchar(20),       
+	old_password varchar(20))$   
 
-
-
-create or replace trigger check_pass before update on user
+create trigger check_pass before update on user
 for each row
 begin
 	if new.password = old.password || new.password = old.old_password 
-	
+		
 	then 
 		signal sqlstate '65000'
 		set message_text = 'recently used password';
@@ -53,7 +51,9 @@ begin
 		set new.old_password = old.password;
 	end if;
 end$
-
+insert into user values(1,"raj","1234",null)$
+select * from user$
+update user set password = "4321"$
 
 
 

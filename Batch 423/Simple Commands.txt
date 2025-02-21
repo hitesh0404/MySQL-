@@ -1,0 +1,452 @@
+Show databases;
+
+Create database Batch423;
+
+use Batch423;
+
+create table first(id int);
+
+show Tables;
+
+
+describe first;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+show databases;
+
+create database batch423;
+
+use batch423;
+
+show tables;
+
+create table student(
+		id int,
+		name varchar(20),
+		age int,
+		contact_number bigint);
+
+desc student;
+
+
+
+alter table <table_name>
+
+			Add     
+				Column       <col_name>   <DataType> <constrint> ;   
+				Constraint   <contarint_desc>;
+---------------------------------------------------------------------------		
+			Drop	 
+				Column       <col_name>;
+				Constraint   <contarint_name>;
+----------------------------------------------------------------------------
+			Modify  <col_name>   <DataType> <constrint> ; 
+
+
+
+ alter table student add column address varchar(20) unique;
+
+ alter table student modify address varchar(20) after name;
+				
+
+
+
+
+
+
+
+
+alter table students
+	drop constraint `address`;
+
+
+insert into <table_name>
+			values
+(<col_val>,<col_val>);
+
+insert into student
+			values
+(1,"raj","mum",12,123456),
+(1,"raj","mum",12,123456);
+
+
+
+
+
+insert into <table_name>
+			values
+(<col_val>,<col_val>),
+(<col_val>,<col_val>);
+
+insert into <table_name>(<col>,<col>)
+			values
+(<col_val>,<col_val>);
+
+
+
+insert into student(id,name)
+			values
+(1,"raj"),
+(2,"Rajesh");
+
+
+
+
+insert into students values
+(1,"Raj","Mumbai",11,1234567890),
+(2,"Rajesh","Dubai",13,1234567990),
+(3,"Rakesh","Hubli",14,1234567980);
+
+
+create table subject(
+id int,
+name varchar(20),
+duration int
+);
+
+alter table subject modify duration double(6,2);
+
+
+
+id	name	duration
+1	Python	40
+2	Java	56.5
+3	Cpp	44
+4	PHP	36
+
+
+
+
+
+Start transaction;
+
+delete from subject;
+
+select * from subject;
+
+rollback;
+
+select * from subject;
+
+
+
+parent: Dept
+Child : Emp
+
+alter table dept add constrint primary key(id);
+alter table dept modify id int primary key;
+
+alter table emp
+	 add constraint 
+		foreign key (dept_id)
+				 references dept(id);
+
+
+alter table <child_tn>
+		add constraint 
+			foreign key (<child_col_name>)
+					references <parent_tn>(<parent_col_name>);
+
+
+Rules 
+1. datatype should be same 
+2. parent should have primary key 
+	or 
+	not null + unique key on a perticular column to share that.
+3. within same database
+
+
+
+
+
+
+create table project(
+    project_id int,
+    Client_name varchar(20),
+    project_name varchar(20),
+    start_date date,
+    end_date date,
+    primary key(project_id));
+
+
+
+ alter table project add column project_id int primary key first;
+
+
+ alter table project modify project_id int primary key first;
+
+
+
+
+
+
+create table employee_project(
+    employee_project_id int,
+    employee_id int,
+    project_id int,
+    foreign  key `emp_f_k` (employee_id) references employee(employee_id),
+    foreign  key `pro_f_k` (project_id) references project(project_id),
+    primary key(employee_project_id));
+
+
+
+
+
+
+DQL 
+
+ select <col_name>,<col_name> from <table_name> ;
+
+
+	select 
+		employeeNumber,firstName,lastName
+						from employees; 
+
+	Where <condition>;
+
+	Limit offset,value;
+
+	order by <col_name>;
+	order by <col_name> desc;
+eg.	order by firstName,lastname desc;
+
+
+
+
+
+
+ select 
+	orderNumber,
+	orderDate,
+	requiredDate,
+	shippedDate,
+	status,
+	orders.customerNumber,
+	contactFirstName 
+from 
+		orders
+	join 
+		customers
+	
+	on 
+		customers.customernumber = orders.customernumber 
+	ORDER BY orderNumber 
+	limit 10;
+
+
+
+
+
+
+select 
+		<tn>.<col_list> 
+	from 
+		<tn1> 
+	
+	<type_of_join> join
+
+		<tn2>
+
+	on 
+		tn1.col = tn2.col;
+
+	using(<col_name>);
+
+
+
+
+select 
+	employee_id,
+	e.name,
+	department_id,
+	d.name 
+from
+	department d 		left join 		employee e 
+	
+	using (department_id);
+
+
+
+select 
+	orderNumber,orderDate,requiredDate,
+	shippedDate,status,customerNumber,contactFirstName 
+from 
+	orders 
+natural join 
+	customers limit 10;
+
+ select
+    	
+     from
+     department  natural join employee ;
+
+
+
+
+select 
+	customers.customerNumber,
+	customers.customerName,
+	payments.amount
+	
+from 
+	customers
+
+inner join 
+	
+	payments
+
+using(customerNumber) 
+	
+	limit 10;
+
+
+
+
+
+CREATE TABLE `employee` (
+  `employee_id` int NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `salary` double(10,2) DEFAULT NULL,
+  `department_id` int DEFAULT NULL,
+  `document_id` int DEFAULT NULL,
+  `manager_id` int DEFAULT NULL,
+  PRIMARY KEY (`employee_id`),
+  UNIQUE KEY `salary` (`salary`)
+);
+
+
+alter table employee add column manager_id int;
+alter table employee 
+		
+	add constraint 
+	
+	foreign key(manager_id) 
+		
+		references employee(employee_id);
+
+
+
+select 
+	child.*,
+	parent.name 
+from 
+	employee as child
+	
+right join 
+	employee as parent 
+
+on 	
+	child.manager_id=parent.employee_id
+
+where 
+	parent.manager_id is null;
+
+select 
+	c1.customerNumber,
+	c1.customerName,
+	c2.customerNumber,
+	c2.customerName ,
+	c1.city
+from 
+	customers c1 
+join 
+	customers c2 
+	
+using (city) 
+
+where 	
+	c1.customerNumber!=c2.customerNumber 
+limit 10;
+
+
+
+
+
+
+select 
+	c.firstname,
+	o.orderNumber,
+	o.orderDate,
+	o.status,
+	od.quantityOrdered,
+	od.priceEach,
+	p.productCode,
+	p.productName,
+	p.buyPrice
+	
+
+select 
+	c.contactFirstName,
+	o.orderNumber,
+	o.orderDate,
+	o.status,
+	od.quantityOrdered,
+	od.priceEach,
+	p.productCode,
+	p.productName,
+	p.buyPrice
+from 	customers c	        
+join	 orders o               
+	using(customerNumber)
+
+join	orderdetails od         
+	using(ordernumber)
+
+join products p
+	using(productcode)
+
+where customerNumber =103;
+
+
+
+
+
+
+
+
+
+
+
+
+select 
+	p.productcode,
+	productName,
+	sum(quantityOrdered) as sold_quantity ,
+	sum(quantityOrdered*priceeach) as Total_revenue,
+from 
+	products p 
+join 
+	orderdetails
+ 
+using(productcode) 
+group by productcode 
+limit 10;
+
+
+
+1,2 3,5,6,7,3,11
+1,2,3,4,5,6,7,8,     Binary tree algo 
+
+
+
+
+
+
+select * from employee where employee_id in (1,2,3,4);
+select * from employee where employee_id>=1 and employee_id <=4;
+select * from employee where employee_id between 1 and 4;

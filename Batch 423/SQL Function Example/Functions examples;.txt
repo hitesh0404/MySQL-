@@ -1,0 +1,50 @@
+create function pnve(number double)
+	returns boolean no sql
+	begin
+		if number>0 
+			then return 1; 
+		else 
+			return 0; 
+		end if;
+	end$
+
+create function oddeve(number double)
+	returns varchar(10) no sql
+	begin
+		if number%2=0 
+			then return concat(number, " is Even");
+		else
+			return concat(number, " is Odd");
+		end if;
+	end$
+
+
+create function get_manager_dept(emp_id int)
+returns int reads sql data
+begin
+	declare result int;
+	select (select 
+			m.department_id 
+		from 
+			employee m 
+		where 
+			m.employee_id = e.manager_id
+		)	
+			as dept_id  into result 
+	from 
+		employee e 
+	where 
+		e.employee_id = emp_id;
+	return result;
+end$
+
+
+
+
+update 
+	employee 
+set 
+	department_id = get_manager_dept(employee_id) 
+where 
+	manager_id is not null$
+
