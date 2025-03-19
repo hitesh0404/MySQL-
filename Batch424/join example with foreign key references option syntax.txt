@@ -1,0 +1,54 @@
+select 
+	p.productCode ,
+	productName ,
+	sum(quantityOrdered) 
+
+from 
+	orderdetails as o 
+inner join 
+	products as p 
+
+on 
+	p.productCode = o.productCode  
+	group by p.productCode
+	order by  sum(quantityOrdered) desc
+limit 10;
+
+
+
+
+
+
+
+with help of "using" keyword
+
+
+select 
+	p.productCode ,
+	productName ,
+	sum(quantityOrdered) 
+
+from 
+	orderdetails as o 
+inner join 
+	products as p 
+
+using(productCode)                                
+	group by p.productCode
+	order by  sum(quantityOrdered) desc
+limit 10;
+
+
+
+FOREIGN KEY
+    [index_name] (col_name, ...)
+    REFERENCES tbl_name (col_name,...)
+    [ON DELETE reference_option]
+    [ON UPDATE reference_option]
+
+
+foreign key
+		(<child_col_name>) 
+	references <parent_table>(<parent_col>)
+	on delete cascade
+	on update cascase

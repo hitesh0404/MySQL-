@@ -1,0 +1,55 @@
+alter table books add column total_count int,add column availble_count  int;
+alter table borrow_book modify borrow_book_id int auto_increment;
+delimiter $
+
+drop procedure Borrow_a_Book$
+create procedure Borrow_a_Book(in stu int,in book_in int)
+begin
+	declare student_var  int;
+	declare pending_amt double;
+	declare book_var int;
+	select student_id  into  student_var from student 
+						where student_id = stu and borrowed_book is null ; 
+	select total_pending_fee into pending_amt from student 
+						where student_id = stu;
+	select book_id into book_var  from books 
+						where book_id = book_in 
+						and availble_count >0 ;
+	if student_var
+	then 
+		if pending_amt<100
+		then 
+			if book_var
+			then 
+				insert into borrow_book values
+			(null,book_var,student_var,null,null,1,null,null);
+			else
+				Signal SQLSTATE "65000"
+				set MESSAGE_TEXT = "Book is not Availble";
+			end if;
+		else 
+			Signal SQLSTATE "65000"
+			set MESSAGE_TEXT = "Pending Amount is > 100";
+		end if;
+	else 
+			
+		Signal SQLSTATE "65000"
+		set MESSAGE_TEXT = "Student doesn't exists";
+	end if;
+	update books set  availble_count =  availble_count-1 
+						where book_id = book_var;
+	update student set borrowed_book = book_var 
+					where student_id = student_var ;
+
+end$
+
+
+
+
+
+student id => student  ......check student present        yes
+				   pending amount <100    fine
+
+book       => books     ......check availblecount>0
+
+insert into => borrow_book  .... insert into 

@@ -1,0 +1,39 @@
+select 
+	employeeNumber,
+	lastName,
+	firstName,
+	offices.officeCode,
+	city 
+from 
+	employees 
+
+natural join 
+
+	offices ;
+
+
+select  
+	orderNumber , 
+	orderDate  , 
+	requiredDate , 
+	shippedDate , 
+	status , 
+	customernumber  
+from 
+	orders 
+where orderDate > "2005-04-01";
+select  
+	orderNumber , 
+	orderDate  , 
+	requiredDate , 
+	shippedDate , 
+	status , 
+	customernumber,
+	contactFirstName,
+	phone
+
+from 
+	orders 
+natural join 
+	customers
+where orderDate > "2005-04-01";

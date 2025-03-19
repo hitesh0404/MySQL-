@@ -1,0 +1,63 @@
+select 
+	child.*,
+	parent.employeenumber,
+	parent.firstname,
+	parent.lastname,
+	child.reportsTo
+from 
+	employees as child 
+join 
+	employees as parent
+on 
+	parent.employeenumber = child.reportsTo;
+
+
+ select * from orders where customernumber in
+
+(select  
+	c.customerNumber
+from 
+	customers c 
+join 
+	orders using(customernumber) 
+join 
+	sum_of_value_of_orders using(ordernumber) 
+
+group by customernumber 
+	having 
+sum(total_value)>500000);
+
+
+
+select  
+	* 
+from
+	employees 
+join 
+	offices
+using(officecode)
+where city = "Paris";
+
+select 
+	* 
+from 
+	employees 
+where 
+	officecode = (select officecode from offices where city = 'paris');
+
+
+select 
+	employeeNumber,
+	concat_ws(' ',firstName,lastName,),
+	(select city from offices as o where o.officecode = e.officecode) 
+		as city 
+
+from 
+	employees e ;
+
+
+
+
+
+
+

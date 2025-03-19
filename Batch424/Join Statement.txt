@@ -1,0 +1,18 @@
+select * from t1 join t2 on condition;       //inner
+select * from t1 join t2 ;   	             //cross
+select * from emp join emp;
+
+1.join works as inner join when we specify the on condition 
+othervise it works as cross join
+
+
+2. inner join
+3. outer join
+		a. left outer join or left join
+		b. right outer join or right join
+		c. full outer join or full join(Mysql does not support)
+4. cross join
+5. self join (Note: the self is not the keyword self means the both the 
+			tables are the same table , it applies on the 
+			one table only)
+

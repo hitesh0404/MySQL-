@@ -1,0 +1,19 @@
+create table emp_log as select *from emp limit 0$
+alter table emp_log add column deleted_on datetime$
+
+create trigger e4 before delete on emp
+    for each row
+    begin
+              insert into emp_log 
+					values( old.id,
+						old.name,
+						old.age,
+						old.salary,
+						old.join_date,
+						old.dept_id,
+						now());
+    end$
+alter table salary_log drop constraint `salary_log_ibfk_1`;
+delete from emp where id=2$
+select * from emp_log$
+

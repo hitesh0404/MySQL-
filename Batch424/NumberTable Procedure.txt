@@ -1,0 +1,55 @@
+create procedure count_four()
+    begin
+              declare count int default 1 ;
+              first_loop : loop
+                                      if count>4
+                                      then leave first_loop;
+                                      else
+                                              select count;
+                                              set count = count+1;
+                                      end if;
+              end loop first_loop;
+     end$
+
+
+drop procedure if exists NumberTable$
+create procedure NumberTable(in num double)
+	begin 
+		declare count int default 1 ;
+		declare result varchar(40) default 1;
+		drop table if exists number_table_t1;
+		set result  = concat('table of',num);
+		create table number_table_t1(multiple_of varchar(40));
+              	first_loop : loop
+                	                      if count>10
+                        	              then leave first_loop;
+                                	      else
+						set result = concat(num,' X ',count ,' = ',num*count);
+                                        	    insert 	
+							into 
+						    number_table_t1 
+						    values(result);
+                                              	      set count = count+1;
+                                      	      end if;
+                end loop first_loop;
+		select multiple_of as result from number_table_t1;
+		
+     end$
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -4,29 +4,31 @@ BEGIN
 	declare counter int default 1;
 	inner_loop:LOOP
    		IF counter=4 THEN
-			set counter = counter+1;
+			set counter = counter+1;     
 			ITERATE inner_loop;
-   		ELSE IF counter = 10 THEN
-			LEAVE inner_loop;
-   		ELSE
-			select counter;
-			set counter = counter+1;
-   		END IF;
+   		ELSE 
+			IF counter = 10 THEN
+				LEAVE inner_loop;
+   			ELSE
+				select counter;    1 2 3 5 6 7 8 9 10
+				set counter = counter+1;     6
+   			END IF;
 		END IF;
 	END LOOP inner_loop;
-	set counter =-1;
-
---While Loop
+	
+--While Loop	
+	set counter =-1;	
 	label: WHILE counter >= -10 DO
-			select counter;
-   	 		SET counter =counter-1;
+			select counter;          
+   	 		SET counter =counter-1;  
   	END WHILE label;
 
 --Repeat 
 
  	SET @x = 0;
+	set p1=10;
          REPEAT
-           SET @x = @x + 1;
+           SET @x = @x + 1;   
          UNTIL @x > p1 
 	END REPEAT;
 END

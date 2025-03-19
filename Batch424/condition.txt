@@ -1,0 +1,57 @@
+select 
+	customerNumber,
+	customerName  ,
+	case
+		when country ="USA"
+		then "AMERICA"
+		when country = "Australia"
+		then "Straya"
+		else country
+	end
+	as country
+
+	from 
+		customers limit 10;
+
+
+
+select 
+	case 
+		when <contidion>
+		then <result>
+		when <contidion>
+		then <result>
+		else
+		<default>
+	end
+		as new_column_name
+
+	from <tn>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	

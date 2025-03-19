@@ -1,0 +1,29 @@
+create procedure filter_cust(in amt double)
+begin
+	select 
+		customers.*,
+		sum(quantityOrdered*priceeach) as total 
+	from 
+			customers
+				  	join 
+			orders          	using(customerNumber)
+				  	join 
+			orderDetails
+						using(ordernumber)
+		        group by customernumber
+		
+			having total>amt;
+
+end$
+
+create procedure total_sale(out amount double)
+begin
+	select 
+		sum(quantityOrdered*priceeach) 
+		into amount from 
+			orderDetails;
+					
+end$
+
+
+

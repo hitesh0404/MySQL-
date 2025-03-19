@@ -1,0 +1,29 @@
+create  trigger e1 before insert on emp
+    -> for each row
+    -> begin
+    ->          if new.id<0 then set new.id=new.id+1000;
+    -> end if;
+    -> end$
+Query OK, 0 rows affected (0.02 sec)
+
+
+
+create table
+    -> salary_log
+    -> (
+    -> emp_id int auto_increment,
+    -> salary double(12,2),
+    -> updated_on datetime
+    -> default now(),
+    -> foreign key(emp_id)
+    -> references emp(id)
+    -> );
+    -> $
+
+
+
+ create trigger e2 after update on emp
+    -> for each row
+    -> begin
+    ->          insert into salary_log(emp_id,salary) values(new.id,new.salary);
+    -> end $
