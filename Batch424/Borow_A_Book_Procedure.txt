@@ -1,7 +1,7 @@
 alter table books add column total_count int,add column availble_count  int;
 alter table borrow_book modify borrow_book_id int auto_increment;
+update books set total_count=10 , availble_count=10;
 delimiter $
-
 drop procedure Borrow_a_Book$
 create procedure Borrow_a_Book(in stu int,in book_in int)
 begin
@@ -34,7 +34,7 @@ begin
 	else 
 			
 		Signal SQLSTATE "65000"
-		set MESSAGE_TEXT = "Student doesn't exists";
+		set MESSAGE_TEXT = "Student doesn't exists or he/she borrowed a book";
 	end if;
 	update books set  availble_count =  availble_count-1 
 						where book_id = book_var;
