@@ -1,0 +1,54 @@
+create database batch208;
+use batch208;
+
+create table employees(
+	employee_id 	int,
+	first_name 	varchar(20),
+	last_name 		varchar(20),
+	email 		varchar(50),
+	joining_date 	date,
+	dob 		date,
+	manager_id 	int
+);
+alter table <table_name>
+		- add
+		        -:column
+		        -:constraint
+		-drop
+		        -:column
+		        -:constraint
+		modify
+		        -: 
+alter table employees 
+	add constraint 
+		primary key(employee_id);
+
+alter table employees
+	add column 
+		contact_number varchar(13)  ;
+alter table employees
+	add column 
+		gender enum("Male","Female","Others"),
+	add column 
+		location varchar(20)  ;
+
+
+
+alter table employees 
+	modify 
+		dob date after email;
+
+
+rename table employees to employeeeees;
+
+alter table employeeeees 
+	rename
+		 to employees;
+
+alter table employees 
+	rename column 
+		manager_id to manager ; 
+
+alter table employees 
+	drop column 
+		location;
