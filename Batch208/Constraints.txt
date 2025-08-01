@@ -1,0 +1,87 @@
+	
+1. may required or work more then one column of 
+	the table.
+2. all the key constraints are the table level constrint and
+    the check is also table level constrint in newer version
+    of mysql.
+3. primary key,unique key, foreign key,check
+4. we can add these constrint at the time of 
+    i.creating table
+    ii. with help of alter command
+    iii. with the help of modify command
+5. To remove we require 
+    i. alter command 
+
+A. Unique Key
+	i. the data in a column should be unique and 
+	ii. there can be multiple null
+B. Primary Key( unique + not null )(only one)
+	i. The data should be unique as well null is not allowed
+C. Foreign Key: ( Reference Key )
+	i. The parent should hold the primary key(unique+not null)
+	ii. child will refer parent's primary key column
+	iii. Both child and Parent should be in same DB
+	iv. The DataType should Be same 
+	REFERENCE TYPES
+		a. Cascade:
+			replica of parent
+		b. no action
+			Take no Action
+		c. Set null 
+			set to null if there any change occurs in parent
+		d. set Default
+			set the default value if there any change occurs in parent
+
+		e. Restrict
+ 			Retrict parent to apply changes 
+			this is by default
+	Note : we have two Reference Option Type
+		1. On Delete
+		2. On Update
+
+
+
+Column level Constrints can be added at the
+				1. creating table
+				2. modifying column
+				3. adding column
+works with a single column
+to add we need modify 
+to drop we need same modify
+
+note : if we forgot to add constraints which was there at the time of modify they will get droped automatically
+
+eg.   Not Null ,	Default ,	Auto Increament ,	data type
+
+
+
+
+
+Foreign key syntax
+		create table <tn> (
+				<cn> <dt>,
+				<cn> <dt>,
+				<cn> <dt>,
+				foreign key(<cn>) references <parent tn> (<parent cn>)
+			);
+
+	eg.	create table orders(
+				order_id int,
+				order_date date,
+				customer_id int,
+				foreign key(customer_id) references customers(customer_id)
+			);
+
+		altet table <child tn> add constraint foreign key(<child cn>) references <parent tn>(<parent cn>);
+
+	eg.	alter table employees add constraint `department_Fk` foreign key(department_id) 
+		references departments(department_id) on delete cascade on update cascade;
+
+
+
+
+
+
+
+
+
