@@ -1,0 +1,131 @@
+select 
+	orderNumber ,
+	orderDate  ,
+	requiredDate ,
+	shippedDate , 
+	status , 
+	orders.customerNumber ,
+	customerName ,
+	phone
+from 
+      orders 
+	inner join 
+      customers 
+on 
+
+	orders.customernumber  =  customers.customernumber 
+limit 10;
+
+select 
+	employees.*,
+	city
+from
+	employees 
+     join
+	offices
+on 
+	employees.officecode = offices.officecode;
+
+
+select 
+	employees.*,
+	city
+from
+	employees 
+     join
+	offices
+using (officecode);                               -- both table having same column name
+
+
+select 
+	employees.*,
+	city
+from
+	employees 
+     natural join
+	offices;                               -- both table having same column name and they have foreign key relation
+
+
+
+
+
+create table customer(
+	id int ,
+	name varchar(20));
+
+create table sample_product(
+	name varchar(20));
+
+insert into customer values(1,"Rithik"),(2,"Sujal"),(3,"Sameer"),(4,"Vishal");
+
+insert into sample_product values("Veg Momo"),("Paneer Momo"),("Schezwan momo");
+
+select * from customer cross join sample_product;
+
+
+
+Right Join
+
+
+select 
+	o.customerNumber,
+	count(c.customernumber)
+ from 
+	orders as o 
+right join 
+	customers as c 
+using(customerNumber) 
+group by o.customernumber;
+
+
+
+
++----------------+-----------+-----------+------------+---------------+
+| employeeNumber | firstName | lastName  | officecode | city          |
++----------------+-----------+-----------+------------+---------------+
+|           1002 | Diane     | Murphy    | 1          | San Francisco |
+|           1056 | Mary      | Patterson | 1          | San Francisco |
+|           1076 | Jeff      | Firrelli  | 1          | San Francisco |
+|           1143 | Anthony   | Bow       | 1          | San Francisco |
+|           1165 | Leslie    | Jennings  | 1          | San Francisco |
+|           1166 | Leslie    | Thompson  | 1          | San Francisco |
+|           1188 | Julie     | Firrelli  | 2          | Boston        |
+|           1216 | Steve     | Patterson | 2          | Boston        |
+|           1286 | Foon Yue  | Tseng     | 3          | NYC           |
+|           1323 | George    | Vanauf    | 3          | NYC           |
+|           1102 | Gerard    | Bondur    | 4          | Paris         |
+|           1337 | Loui      | Bondur    | 4          | Paris         |
+|           1370 | Gerard    | Hernandez | 4          | Paris         |
+|           1401 | Pamela    | Castillo  | 4          | Paris         |
+|           1702 | Martin    | Gerard    | 4          | Paris         |
+|           1621 | Mami      | Nishi     | 5          | Tokyo         |
+|           1625 | Yoshimi   | Kato      | 5          | Tokyo         |
+|           1088 | William   | Patterson | 6          | Sydney        |
+|           1611 | Andy      | Fixter    | 6          | Sydney        |
+|           1612 | Peter     | Marsh     | 6          | Sydney        |
+|           1619 | Tom       | King      | 6          | Sydney        |
+|           1501 | Larry     | Bott      | 7          | London        |
+|           1504 | Barry     | Jones     | 7          | London        |
+|           1704 | Rajesh    | Rathod    | NULL       | NULL          |
+|           1710 | Mukesh    | Rane      | NULL       | NULL          |
+|           NULL | NULL      | NULL      | 8          | Mumbai        |
+|           NULL | NULL      | NULL      | 9          | Pune          |
++----------------+-----------+-----------+------------+---------------+
+
+
+select customernumber,customername,o.ordernumber,sum(priceeach*quantityordered)
+    -> from customers join orders o using(customernumber)
+    -> join orderdetails using(ordernumber) group by o.ordernumber;
+
+
+
+
+
+
+
+
+
+
+select customernumber,customername,sum(priceeach*quantityordered)
+    from customers c join orders o using(customernumber)
+     join orderdetails using(ordernumber) group by c.customernumber;
