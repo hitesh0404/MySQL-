@@ -1,0 +1,188 @@
+SQL 
+MYSQL
+RDBMS Table Reference key(foreign key)
+one to many
+many to many (juction table)
+many to one
+one to one
+
+DDL 
+	create  
+	alter add or drop (constrint or column) modify
+	drop 
+	truncate
+	rename
+
+DML 
+	insert 
+	update
+	delete
+
+
+constraints
+	table 
+		unique
+		primary (unique + not null)
+		foreign key
+		check
+	column
+		not null
+		default
+		auto_increment
+
+
+DQL 
+	Select 
+	
+	select customerNumber,firstName
+		from customers;
+* all the columns
+limit can be applied with update and delete condition
+offset 
+		limit 4,10
+
+
+apply condition
+	Where clause
+	having used with grouped records
+
+		grade >9 and grade <21
+		grade between 10 and 20                 
+
+	raj
+	rajesh 
+	mukesh
+
+	name = "raj" or name="rajesh" or name ="mukesh"
+	name in ("raj","rajesh","mukesh")
+
+	range     with help of between 10 and 20
+	list         with the help of in operator
+ 
+Order by 
+	asc 
+	Desc 
+
+Group By
+	
+Aggregate function
+		min
+		max
+		count
+		avg
+		sum
+alis a temporary name can be given to table or column
+
+Joins
+	Cross      M X N
+	inner      maching 
+	outer
+		left    whole from left and maching from right and we get null for non matching in right table
+		right whole from right and maching from left
+		full   whole record from left and right
+	self
+	
+	
+Subquery
+		Query inside query is known as sub-query also know as inner query 
+		sub-query executes first 
+		outer query or main query usses the result of sub-query
+why?
+	when we require the output of other query(sub-query) as a input to the main query.
+
+select
+update
+delete
+insert
+create
+
+
+select employeenumber,firsname from employees where officecode in (
+		
+				select 
+					officecode
+				from 
+					offices
+				where 
+					city in ("tokyo","nyc","paris")
+
+		);
+
+
+
+	derive table
+
+create view sales as 
+ select
+	customernumber,
+	customerName,
+	sum(total) from ( 
+		         select 
+			c.customerNumber,
+			customerName,
+			o.orderNumber,
+			sum(quantityOrdered*priceEach) as total 
+		         from
+  			customers c 
+		         natural join 
+			orders o  
+		         natural join 
+			orderdetails 
+    		         group by 
+			o.ordernumber ) as sales  
+
+	group by 
+		customerNumber 
+	order by sum(total) desc limit 10;
+
+
+
+
+
+
+
+
+
+
+select 
+	customernumber,
+	customername,
+	phone 
+from 
+	customers 
+where 
+	customernumber in ( select 
+				customernumber 
+			from 
+				orders 
+			where 
+				orderdate 
+			between 
+				 "2003-01-01"  and  "2003-12-31"
+			);
+
+-- corelated subquery
+
+
+select 
+	customerNumber,
+	CustomerName
+from 
+	customers
+where 
+	customernumber  in (
+			select
+				 customernumber
+			from  
+				orders o
+			natural join 
+				orderdetails
+			
+			group by
+				
+				customernumber
+			having 
+				
+
+
+

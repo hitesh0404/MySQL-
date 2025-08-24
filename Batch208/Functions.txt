@@ -1,0 +1,32 @@
+DB Objects 
+
+FUNCTION   
+	
+
+delimiter $
+create function add(a int,b int)
+returns int
+DETERMINISTIC
+begin
+ return a+b;
+end
+$
+ create function subtract(a int,b int)
+ returns double
+ DETERMINISTIC
+ return a-b$
+delimiter $
+
+Create function recent_order_number()
+returns int
+READS SQL DATA
+begin 
+	declare ordnum int default 0;
+	select ordernumber into ordnum from orders order by orderdate desc limit 1;
+	return ordnum;
+end$
+delimiter ;
+show function status where db = "classicmodels";
+show function code subtract;
+SHOW CREATE FUNCTION recent_order_number;
+drop function recent_order_number();

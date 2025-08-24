@@ -35,7 +35,8 @@ select * from orderdetails
 
 SELECT 
     productname, 
-    buyprice
+    buyprice,
+    productLine
 FROM
     products p1
 WHERE

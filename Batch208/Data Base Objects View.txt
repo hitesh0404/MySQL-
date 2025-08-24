@@ -1,0 +1,43 @@
+join 
+	combine column of two or more table
+	it can be fast compare to sub-query(index)
+	type
+		inner,outer
+sub-query 
+	column from one table only
+	type
+		single value , multivalue,
+		corelated
+		derived table
+User Define Function
+	we can utilise these with select
+	functionName(arrgs....)
+	calculation	
+	DQL
+Procedure
+	call procedurename(arrgs...);
+	DML,DDL,DQL
+	task can involve multiple table
+Trigger
+	no need to call 
+	work for single table
+	executes autometically(fires)
+		when DML commands occurs
+View 
+	stored Query
+	acts like a table	
+
+how to create 
+		create view as <query>;
+why
+	to improve readablity
+	to apply extra layer of security by restricting the access
+	its does not require memory to store the result instead it uses live table
+	 
+
+
+
+
+
+
+
