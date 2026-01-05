@@ -1,0 +1,94 @@
+views
+	simple views   insert,update,delete
+	with help of  where  we can apply condition 
+			1. with local check
+			2. with cascaded check
+
+Function
+	between query we call function
+	perameter + it returns single value
+Procedure  
+	we need `call` keyword to execute a procedure
+	it can return more then one value
+
+creare procedure simplecal(in float a, out float b, inout float c)
+
+
+sesion variables
+
+set @var1 = 10;
+select 20 into @var2;
+
+
+
+
+create procedure calculate(in a int ,out result int )
+set result = a*3;
+
+
+
+procedure 
+	DML
+	DDL
+	DQL
+	Transections
+
+	secuirity imporoves
+		50 sql query stored inside db
+		call tranfer_fund(accb,accb,amt);
+	network traffic
+		via only traffering the name of the procedure instead code
+	code reausablity
+	apply validations
+
+delimiter $
+create procedure create_table(in name varchar(50))
+begin 
+	create table name(id int);
+end$
+	
+
+Trigger 
+
+	function 
+	procedure 
+	view 
+	
+	select  - view - function 
+	call    -procedure
+
+	it executes autometically
+	DML
+		insert 
+		update 
+		delete
+before after 
+
+                  /before insert
+after insert
+before update
+after update
+before delete
+	 /after delete
+
+create table user(id int,name varchar(20),
+	constraint check(id>0 and length(name)>3)	
+);
+create table userlog(id int,name varchar(20),	
+);
+create trigger check_user_data  before delete on user
+for each row
+begin 
+	insert into userlog values(old.id,old.name);
+end$
+
+
+
+
+
+
+
+
+
+
+

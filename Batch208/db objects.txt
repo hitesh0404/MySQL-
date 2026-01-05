@@ -1,0 +1,37 @@
+view and table 
+1.table is a stucture made of columns with datatype and constrinats
+2.view is wriiter with help of table which is a stored query
+
+create view emp as select * from employees ;           -- view
+
+select * from ( select * from employees ) as emp;     -- derived table
+
+select * from emp;
+insert update delete for that the view should simple view
+
+
+function
+procedure
+trigger
+
+
+delimiter ;
+Session Variable
+
+set @num = 12;
+
+select 12 into @num;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
